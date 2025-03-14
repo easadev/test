@@ -41,5 +41,5 @@
     "test:coverage:ci": "rm -rf coverage && deno task test --coverage && deno coverage coverage --lcov --output=coverage/lcov.info",
     "version": "sh upgradeVersion.sh"
   },
-  "version": "3.1.0-rc.0"
+  "version": "3.1.0-rc.1"
 }
