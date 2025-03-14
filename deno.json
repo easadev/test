@@ -1,0 +1,45 @@
+{
+  "imports": {
+    "@deno/djwt": "https://deno.land/x/djwt@v3.0.1/mod.ts",
+    "@deno/lodash/defaultTo": "https://deno.land/x/lodash@4.17.15-es/defaultTo.js",
+    "@deno/lodash/get": "https://deno.land/x/lodash@4.17.15-es/get.js",
+    "@deno/lodash/isEmpty": "https://deno.land/x/lodash@4.17.15-es/isEmpty.js",
+    "@deno/lodash/noop": "https://deno.land/x/lodash@4.17.15-es/noop.js",
+    "@deno/nessie": "https://deno.land/x/nessie@2.0.11/mod.ts",
+    "@deno/nessie/cli": "https://deno.land/x/nessie@2.0.11/cli.ts",
+    "@deno/oak": "https://deno.land/x/oak@v13.2.5/mod.ts",
+    "@deno/oak/deps": "https://deno.land/x/oak@v13.2.5/deps.ts",
+    "@deno/oakCors": "https://deno.land/x/cors@v1.2.2/mod.ts",
+    "@deno/redis": "https://deno.land/x/redis@v0.32.1/mod.ts",
+    "@deno/std/dotenv/load": "https://deno.land/std@0.224.0/dotenv/load.ts",
+    "@deno/std/path": "https://deno.land/std@0.224.0/path/mod.ts",
+    "@deno/std/testing/assert": "https://deno.land/std@0.224.0/assert/mod.ts",
+    "@deno/std/testing/bdd": "https://deno.land/std@0.224.0/testing/bdd.ts",
+    "@deno/std/testing/mock": "https://deno.land/std@0.224.0/testing/mock.ts",
+    "postgres": "https://deno.land/x/postgresjs@v3.4.4/mod.js",
+    "sinon": "npm:sinon@17.0.1",
+    "~/": "./src/"
+  },
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 120,
+    "indentWidth": 2,
+    "semiColons": false,
+    "singleQuote": true,
+    "proseWrap": "preserve",
+    "include": [
+      "src/**/*.js",
+      "tests/**/*.js"
+    ]
+  },
+  "tasks": {
+    "cache": "deno install --entrypoint ./src/index.js",
+    "nessie": "deno run --allow-env --allow-net --allow-read --allow-write --unsafely-ignore-certificate-errors ./src/scripts/nessie.js -c ./nessie.config.js",
+    "start": "deno run --watch --allow-env --allow-net --allow-read --unsafely-ignore-certificate-errors ./src/index.js",
+    "test": "deno test tests --allow-env --allow-read --import-map test.importmap.json",
+    "test:coverage": "rm -rf coverage && deno task test --coverage && deno coverage coverage --detailed",
+    "test:coverage:ci": "rm -rf coverage && deno task test --coverage && deno coverage coverage --lcov --output=coverage/lcov.info",
+    "version": "sh upgradeVersion.sh"
+  },
+  "version": "2.3.0-rc.2"
+}
